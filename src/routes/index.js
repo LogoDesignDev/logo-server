@@ -11,7 +11,7 @@ router.get('/string', async (ctx, next) => {
   const conn = new DbConnection();
   await conn.connect();
 
-  const res = await conn.find('user', {});
+  const res = await conn.find('user');
   ctx.body = {
     res
   };
