@@ -1,4 +1,5 @@
-const router = require('koa-router')()
+const router = require('koa-router')();
+const DbConnection = require('../utils/dbConnection');
 
 router.get('/', async (ctx, next) => {
   await ctx.render('index', {
@@ -7,7 +8,13 @@ router.get('/', async (ctx, next) => {
 })
 
 router.get('/string', async (ctx, next) => {
-  ctx.body = 'koa2 string'
+  const conn = new DbConnection();
+  await conn.connect();
+
+  const res = await conn.find('user', {});
+  ctx.body = {
+    res
+  };
 })
 
 router.get('/json', async (ctx, next) => {
