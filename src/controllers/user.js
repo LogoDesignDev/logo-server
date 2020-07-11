@@ -1,11 +1,11 @@
 const Router = require('../utils/router').Router;
 const Request = require('../utils/router').Request;
-const Service = require('../services/personal');
+const Service = require('../services/user');
 
-@Router('/personal')
-class Personal {
-  @Request('/getUserProdsByUid', 'GET')
-  async getUserProdsByUid(ctx, next) {
+@Router('/user')
+class User {
+  @Request('/getUserInfoByUid', 'GET')
+  async getUserInfoByUid(ctx, next) {
     try{
       let params = ctx.query;
       if (!params.uid) {
@@ -14,9 +14,9 @@ class Personal {
         };
       }
 
-      let ret = await Service.getUserProdsByUid(params);
+      let ret = await Service.getUserInfoByUid(params.uid);
       ctx.body = {
-        code: 200,
+        code: ret ? 200 : 502,  // 找不到该用户
         ret
       };
     } catch (err) {
@@ -28,4 +28,4 @@ class Personal {
   }
 }
 
-module.exports = Personal;
+module.exports = User;

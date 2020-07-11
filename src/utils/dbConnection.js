@@ -25,11 +25,12 @@ class DbConnection{
   /**
    * 封装find方法（返回promise）
    * @param {*} collection 集合名
-   * @param {*} options 查询条件
+   * @param {*} filter 查询条件
+   * @param {*} projection 指定字段
    */
-  find(collectionName, options){
+  find(collectionName, filter, options){
     return new Promise((resolve, reject) => {
-      this.conn.collection(collectionName).find(options).toArray((err, res) => {
+      this.conn.collection(collectionName).find(filter, options).toArray((err, res) => {
         if (err) {
           reject(err);
         } else {
