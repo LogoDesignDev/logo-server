@@ -18,7 +18,7 @@ class Dao {
   static async findByUid(params) {
     let conn = await this.getConnection();
     let skip = (params.pageSize && params.pageIndex) ? (params.pageSize * (params.pageIndex - 1)) : 0;
-    let limit = params.pageSize ? params.pageSize : 6;
+    let limit = params.pageSize ? Number(params.pageSize) : 6;
 
     let filter = { 
       uId: params.uid
