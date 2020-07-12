@@ -31,7 +31,7 @@ class Personal {
   async hasFollowed(ctx, next) {
     try{
       let params = ctx.query;
-      if (!params.uid || !params.othersUidList ) {
+      if (!params.uid || !params.othersUidList) {
         ctx.body = {
           code: 501  // 参数错误
         };
